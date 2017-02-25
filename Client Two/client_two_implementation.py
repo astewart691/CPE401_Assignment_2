@@ -10,7 +10,7 @@ from socket import socket, AF_INET, SOCK_STREAM
 
 def main():
     # assigns the ip address to SERVER and port number to PORT. Creates a tuple.
-    (SERVER, PORT) = ('127.0.0.1', 10001)
+    (SERVER, PORT) = ('127.0.0.1', 10000)
 
     # creates a socket to communicate
     s = socket(AF_INET, SOCK_STREAM)

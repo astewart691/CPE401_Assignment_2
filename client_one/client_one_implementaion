@@ -1,24 +1,29 @@
-'''
+"""
 Project: CPE 401 Assignment2
 File: client_one_implementation.py
 Author: Aarron Stewart
-'''
+"""
 
 # import desired libraries/modules
 from socket import socket, AF_INET, SOCK_STREAM
+from client_one import client_one_supplemental as sup
+from uuid import getnode
+
+# initialize variables
+mac = hex(getnode())
 
 
 def main():
     # assigns the ip address to SERVER and port number to PORT. Creates a tuple.
-    (SERVER, PORT) = ('127.0.0.1', 10001)
+    (SERVER, PORT) = ('127.0.0.1', 10000)
 
     # creates a socket to communicate
     s = socket(AF_INET, SOCK_STREAM)
-
     # creates a connection between the server and itself
     s.connect((SERVER, PORT))
 
-    msg = "Hello, world"
+    msg = sup.register_device("device_one", mac)
+    # msg = sup.quit_device("device_one")
 
     # sends a message to the server
     s.send(msg.encode())
