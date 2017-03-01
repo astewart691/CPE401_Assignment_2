@@ -10,7 +10,7 @@ from Server import server_supplemental as sup
 # from uuid import getnode
 
 # initialize variables
-'''
+"""
 registration_table: list of dictionaries
     format:
         device_id
@@ -29,9 +29,15 @@ mailbox_container:
                 Not used with the push request
 
 mac: mac address for the current device
-'''
+"""
+
 registration_table = []
 mailbox_container = []
+
+'''
+Server design was implemented form the lecture on server implementations.
+'''
+
 
 # s is the socket variable for the listening port
 s = socket(AF_INET, SOCK_STREAM)
@@ -49,15 +55,20 @@ while True:
     # address is a tuple with the IP address of the client
     sock, addr = s.accept()
 
-    print(addr[0], addr[1])
     data = sock.recv(1024)
+
+    # decode, strip and split the message to allow for message processing
     data = data.decode()
-    print(data.split())
 
     data1 = data.strip()
+
     data1 = data.split(',')
-    print(data1[0], data1[1])
+
+    # process the message to perform the appropriate action and return the appropriate response for the client
     reply = sup.message_received(registration_table, mailbox_container, data1, addr)
-    print(registration_table)
+
+    # print reply to console for easy debugging
     print(reply)
+
+    # sent the reply that has been encoded to bytes to the client
     sock.send(reply.encode())
