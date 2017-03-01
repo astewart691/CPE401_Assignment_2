@@ -37,7 +37,7 @@ mailbox_container = []
 s = socket(AF_INET, SOCK_STREAM)
 
 # binds the socket to the local host and the designated port
-s.bind(('127.0.0.1', 10000))
+s.bind(('127.0.0.1', 10001))
 
 # The socket listens for a client to try and connect
 s.listen(5)  # max queued connections

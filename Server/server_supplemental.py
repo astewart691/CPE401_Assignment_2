@@ -15,7 +15,7 @@ def message_received(reg_table, mailbox_cont, msg, address):
 
     elif msg_type == 'DEREGISTER':
 
-        return
+        return deregister_device( reg_table, mailbox_cont, msg[2], msg[3])
 
     elif msg_type == 'MSG':
 
@@ -70,17 +70,44 @@ def register_device( table, mailbox, device, mac, ip, port):
 
             else:
                 table.append({"device_id": device, "mac_address": mac, "ip_address": ip, "port_number": port})
-
+                mailbox.append({"device_id": device, "count": 0, "message": [], "time": None})
                 return "ack"
 
     else:
 
         table.append({"device_id": device, "mac_address": mac, "ip_address": ip, "port_number": port})
-
+        mailbox.append({"device_id": device, "count": 0, "message": [], "time": None})
         return "ack, device registered"
 
 
-def quit_device(table, device_id):
+def deregister_device(table, mailbox, device, mac):
+
+    index = 0
+
+    if len(table) != 0:
+
+        while table[index]["device_id"] != device:
+
+            index += 1
+
+            if index + 1 == len(table):
+
+                return "nack"
+
+        if table[index]["mac_address"] == mac:
+
+            del table[index]
+            del mailbox[index]
+            return "ack, device removed"
+
+        else:
+            return "nack"
+
+    else:
+        return 'nack'
+
+def quit_device(table, device):
+
     index = 0
 
     if len(table) == 0:
@@ -88,10 +115,12 @@ def quit_device(table, device_id):
         return 'nack'
 
     else:
-        while table[index]["device_id"] != device_id:
+        while table[index]["device_id"] != device:
+
             index += 1
 
             if index > len(table):
+
                 return 'nack'
 
         table[index]["ip_address"] = 0

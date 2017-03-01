@@ -15,7 +15,7 @@ mac = hex(getnode())
 
 def main():
     # assigns the ip address to SERVER and port number to PORT. Creates a tuple.
-    (SERVER, PORT) = ('127.0.0.1', 10000)
+    (SERVER, PORT) = ('127.0.0.1', 10001)
 
     # creates a socket to communicate
     s = socket(AF_INET, SOCK_STREAM)
@@ -24,6 +24,7 @@ def main():
 
     msg = sup.register_device("device_one", mac)
     # msg = sup.quit_device("device_one")
+    # msg = sup.deregister_device("device_one", mac)
 
     # sends a message to the server
     s.send(msg.encode())

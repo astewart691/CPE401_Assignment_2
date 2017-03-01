@@ -34,6 +34,21 @@ def register_device(device_id, mac_add):
     return str(complete_message)
 
 
+def deregister_device( device_id, mac_add):
+
+    device = str(device_id)
+
+    mac = str(mac_add)
+
+    msg = "DEREGISTER" + ',' + device + ',' + mac
+
+    msg_length = len(msg)
+
+    complete_message = str(msg_length) + ',' + msg
+
+    return complete_message
+
+
 def quit_device(device_id):
 
     msg = 'QUIT,' + device_id
