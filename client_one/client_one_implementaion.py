@@ -33,10 +33,10 @@ def main():
     s.connect((SERVER, PORT))
 
     # generate a message to be sent to the server
-    msg = sup.register_device("device_one", mac)
+    # msg = sup.register_device("device_one", mac)
     # msg = sup.quit_device("device_one")
-    # msg = sup.deregister_device("device_one", mac)
-    # msg = sup.msg(current_device, current_device, message)
+    msg = sup.deregister_device("device_two", mac)
+    # msg = sup.msg(current_device, "device_two", message)
     # msg = sup.query('1', current_device)
     # msg = sup.query('2', current_device)
 

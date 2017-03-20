@@ -302,7 +302,7 @@ def receive_msg(mailbox, sender_id, recipient_id, message):
         index += 1
 
         # test to see if the end of the list has been reached
-        if index > len(mailbox):
+        if index >= len(mailbox):
 
             # build NACK message with appropriate type
             code = '4'
