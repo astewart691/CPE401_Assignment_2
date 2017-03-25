@@ -8,6 +8,41 @@ import datetime as datetime
 SUCCESSFUL = 'activity.log'
 ERROR = 'error.log'
 
+
+def process_client(soc, address, registration, mailbox):
+    run = True
+
+    while run:
+
+        data = soc.recv(1024)
+
+        if data != '':
+
+            # decode, strip and split the message to allow for message processing
+            data = data.decode()
+
+            data = data.strip()
+
+            data = data.split(',')
+
+            if data[1] == 'QUIT' or data[1] == 'DEREGISTER':
+
+                run = False
+
+            print(data)
+            # process the message to perform the appropriate action and return the appropriate response for the client
+            reply = message_received(registration, mailbox, data, address)
+
+            # print reply to console for easy debugging
+            print(reply)
+
+            # sent the reply that has been encoded to bytes to the client
+            soc.send(reply.encode())
+
+    print('exiting function')
+    soc.close()
+
+
 def message_received(reg_table, mailbox_cont, msg, address):
     """
 
@@ -367,7 +402,7 @@ def receive_query(table, mailbox, code, device_id):
             index += 1
 
             # test to see if the end of the table was found
-            if index > len(table):
+            if index >= len(table):
 
                 # build NACK message with appropriate type
                 code = '4'
@@ -469,7 +504,7 @@ def quit_device(table, device):
             index += 1
 
             # test to see if the end of the table has been found
-            if index > len(table):
+            if index >= len(table):
 
                 # build NACK message with appropriate type
                 code = '4'
@@ -499,6 +534,7 @@ def quit_device(table, device):
         log(SUCCESSFUL, complete_message)
 
         return complete_message
+
 
 def log(file_dest, message):
 

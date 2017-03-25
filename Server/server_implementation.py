@@ -8,6 +8,7 @@ Author: Aarron Stewart
 from socket import socket, AF_INET, SOCK_STREAM
 from Server import server_supplemental as sup
 # from uuid import getnode
+import threading
 
 # initialize variables
 """
@@ -33,7 +34,7 @@ mac: mac address for the current device
 
 registration_table = []
 mailbox_container = []
-
+index = -1
 '''
 Server design was implemented form the lecture on server implementations.
 '''
@@ -55,20 +56,11 @@ while True:
     # address is a tuple with the IP address of the client
     sock, addr = s.accept()
 
-    data = sock.recv(1024)
+    client = threading.Thread(name = (index + 1), target = sup.process_client(sock,
+                                                                              addr,
+                                                                              registration_table,
+                                                                              mailbox_container))
+    client.setDaemon(True)
+    client.start()
 
-    # decode, strip and split the message to allow for message processing
-    data = data.decode()
 
-    data1 = data.strip()
-
-    data1 = data.split(',')
-
-    # process the message to perform the appropriate action and return the appropriate response for the client
-    reply = sup.message_received(registration_table, mailbox_container, data1, addr)
-
-    # print reply to console for easy debugging
-    print(reply)
-
-    # sent the reply that has been encoded to bytes to the client
-    sock.send(reply.encode())

@@ -5,7 +5,7 @@ Author: Aarron Stewart
 """
 
 # import desired libraries/modules
-from socket import socket, AF_INET, SOCK_STREAM
+from socket import socket, AF_INET, SOCK_STREAM, SOCK_DGRAM
 from client_one import client_one_supplemental as sup
 from uuid import getnode
 
@@ -17,12 +17,30 @@ to_device = 'device_two'
 message = 'I hope this works'
 SUCCESSFUL = 'activity.log'
 ERROR = 'error.log'
+udp_transfer_table = []
+
 
 def main():
 
+    run = True
+    tcp_socket = socket(AF_INET, SOCK_STREAM)
+    udp_socket = socket(AF_INET, SOCK_DGRAM)
+    (SERVER, PORT)= ('127.0.0.1', 10001)
+    tcp_socket.connect((SERVER, PORT))
+    print('tcp_port: ' + '%s') % tcp_socket.getsockname()[1]
+    udp_socket.bind(('127.0.0.1', tcp_socket.getsockname()[1]))
+
+    while run:
+        sup.display_menu()
+        run = sup.process_request(tcp_socket, udp_socket, mac, udp_transfer_table)
+
+    tcp_socket.close()
+    udp_socket.close()
+
     '''
+    """
     The client socket design and layout was implemented from class presentation on how to design a client implementation.
-    '''
+    """
 
     # assigns the ip address to SERVER and port number to PORT. Creates a tuple.
     (SERVER, PORT) = ('127.0.0.1', 10001)
@@ -69,5 +87,5 @@ def main():
 
     # close the socket
     s.close()
-
+    '''
 main()
