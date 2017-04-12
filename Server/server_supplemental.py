@@ -4,6 +4,7 @@ File: server_supplemental.py
 Author: Aarron Stewart
 """
 import datetime as datetime
+import boto3
 
 SUCCESSFUL = 'activity.log'
 ERROR = 'error.log'
@@ -77,6 +78,10 @@ def message_received(reg_table, mailbox_cont, msg, address):
     elif msg_type == 'QUIT':
 
         return quit_device(reg_table, msg[2])
+
+    elif msg_type == 'CLOUD':
+
+        return cloud_pull(msg[2], msg[3])
 
     else:
 
@@ -545,3 +550,62 @@ def log(file_dest, message):
     file.write(message + ',' + time_stamp + '\r\n')
 
     file.close()
+
+
+def cloud_pull(device_id, notifcation_type):
+
+    filepath = 'client' + '/' + device_id + '/'
+
+    bucket_name = 'cpe401'
+
+    if notifcation_type == '1':
+
+        cloud_receive(bucket_name, filepath, 'Ping.txt')
+
+        cloud_push(bucket_name, notifcation_type)
+
+    elif notifcation_type == '2':
+
+        cloud_receive(bucket_name, filepath, 'Traceroute.txt')
+
+        cloud_push(bucket_name, notifcation_type)
+
+
+def cloud_receive(bucket_loc, filepath, filename):
+    # create connection for AWS S3 service
+    s3 = boto3.resource('s3')
+
+    file_value = filepath + filename
+
+    # download file that will be updated
+    s3.Object(bucket_loc, file_value).download_file(filename)
+
+    # erase message in case it is read on accident
+    cloud_message_blank(bucket_loc, (filepath + filename))
+
+
+def cloud_message_blank( bucket_loc , filename):
+    # create connection for AWS S3 service
+    s3 = boto3.resource('s3')
+
+    # uploads a blank document to clear file
+    s3.Object(bucket_loc, filename ).upload_file('blank.txt')
+
+
+def cloud_push(bucket_loc, notif_type):
+
+    s3 = boto3.resource('s3')
+
+    filename = "Server" + '/'
+
+    if notif_type == '1':
+
+        filename += 'Ping.txt'
+
+        s3.Object(bucket_loc, filename).upload_file('Ping.txt')
+
+    elif notif_type == '2':
+
+        filename += 'Traceroute.txt'
+
+        s3.Object(bucket_loc, filename).upload_file('Traceroute.txt')

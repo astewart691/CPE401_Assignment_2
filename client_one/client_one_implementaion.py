@@ -8,13 +8,10 @@ Author: Aarron Stewart
 from socket import socket, AF_INET, SOCK_STREAM, SOCK_DGRAM
 from client_one import client_one_supplemental as sup
 from uuid import getnode
+# from threading import Thread
 
 # initialize variables
-# mac = hex(getnode() + 2)
 mac = hex(getnode())
-current_device = 'device_one'
-to_device = 'device_two'
-message = 'I hope this works'
 SUCCESSFUL = 'activity.log'
 ERROR = 'error.log'
 udp_transfer_table = []
@@ -22,70 +19,41 @@ udp_transfer_table = []
 
 def main():
 
+    # initialize variables and the sockets
+    current_device = 'Aarron'
     run = True
     tcp_socket = socket(AF_INET, SOCK_STREAM)
     udp_socket = socket(AF_INET, SOCK_DGRAM)
-    (SERVER, PORT)= ('127.0.0.1', 10001)
+
+    # assign the server address and port to the variables
+    (SERVER, PORT) = ('127.0.0.1', 10001)
+
+    # create the tcp connection with the server
     tcp_socket.connect((SERVER, PORT))
-    print('tcp_port: ' + '%s') % tcp_socket.getsockname()[1]
+
+    # qprint('tcp_port: ' + '%s') % tcp_socket.getsockname()[1]
+
+    # get the tcp socket port number to create the udp socket correctly
     udp_socket.bind(('127.0.0.1', tcp_socket.getsockname()[1]))
 
-    while run:
-        sup.display_menu()
-        run = sup.process_request(tcp_socket, udp_socket, mac, udp_transfer_table)
+    '''
+    receive_udp = Thread(target = sup.recv_data_udp(udp_socket, current_device))
+    receive_udp.setDaemon(True)
+    receive_udp.start()
+    '''
 
+    # run while the program is running
+    while run:
+
+        # display the menu for the program
+        sup.display_menu()
+
+        # get the users response and perform the appropriate action
+        run = sup.process_request(tcp_socket, udp_socket, mac, current_device, udp_transfer_table)
+
+    # close the TCP and UDP Sockets
     tcp_socket.close()
     udp_socket.close()
 
-    '''
-    """
-    The client socket design and layout was implemented from class presentation on how to design a client implementation.
-    """
-
-    # assigns the ip address to SERVER and port number to PORT. Creates a tuple.
-    (SERVER, PORT) = ('127.0.0.1', 10001)
-
-    # creates a socket to communicate
-    s = socket(AF_INET, SOCK_STREAM)
-    # creates a connection between the server and itself
-    s.connect((SERVER, PORT))
-
-    # generate a message to be sent to the server
-    # msg = sup.register_device("device_one", mac)
-    # msg = sup.quit_device("device_one")
-    msg = sup.deregister_device("device_two", mac)
-    # msg = sup.msg(current_device, "device_two", message)
-    # msg = sup.query('1', current_device)
-    # msg = sup.query('2', current_device)
-
-    # sends a message to the server
-    s.send(msg.encode())
-
-    # receives a message from the connection source
-    data = s.recv(1024)
-
-    # decode, strip, and split the data received from the server to record the records
-    data = data.decode()
-
-    data = data.strip()
-
-    data = data.split(',')
-
-    # test to see if the message contains an ack or nack
-    if data[1] == 'ACK':
-
-        # log the message response showing success in the activity.log file
-        sup.log(SUCCESSFUL, data[1:])
-
-    elif data[1] == 'NACK':
-
-        # log the message response showing an error in the error.log file
-        sup.log(ERROR, data[1:])
-
-    # print to console for easy debugging
-    print(data)
-
-    # close the socket
-    s.close()
-    '''
+# run the actual program
 main()

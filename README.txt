@@ -1,6 +1,6 @@
-CPE 401: Assignment 2
+CPE 401: Assignment 3
 Created by Aarron Stewart
-Due March 1, 2017
+Due March 27, 2017
 
 Included files:
 server_implementation.py
@@ -15,36 +15,34 @@ client_one_supplemental.py
 The initial design and implementation of the implementation of the server and clients is from the python lectures in class.
 
 Client_one_implementation.py
-I created this file and forgot that I closed the socket after each run. I do not have time to figure out the blocking for the
-the receive. There will be a function created to handle the appropraite response from the server. Like closing the connection
-will occur after the device is deregistered and after quiting. I need to speak with Dr. Gunes or the TA about how to handle the
-blocking till a response is created. Thus I also do not have the three 10 second delays created for waiting for an ack from the
-server
+The bulk of the code was moved to the client_one_supplemental.py file. The main issue is that the activity and error logging
+has been taken away until I can finish fixing the menu setup for the program. Once that is completed I will incorporate the
+logging for each of the sections. Also I was not able to get the threads to work properly.
 
 Server_implementation.py
-I believe that full functionality of the server implementation has been achieved. The main issue that I currently will need to
-deal with will be figuring out the ability to deal with the sockets once they have been left open. I did not notice that I
-closed the socket after each message in the client.
+The general implementation for the server_implementation.py file is essectially the same as Assignment 2. The issue of not being
+able to maintain a connection with a client has been fix. I created a function that should create a thread whenever a new client
+creates a connection. I do believe that it cannot handle two connections at a time. I think that I made a mistake with the thread
+in the program. I need to talk to the TA about it and get some advice.
 
 Client_one_supplemental.py
-Client_one_supplemental.py is where the functions that create the appropriate message are created. Each message is created
-using a specific set of parameters for each type of message. The log function was created with a typecast list to string.
-I will fix the function to eliminate the list specification when printed. A new function will be created to handle the
-closing of sockets and other functionality using the ack messages from the server.
+Client_one_supplemental.py is where the functions that create the appropriate message are created. The main message creation
+is used from the Assignment 2 code. I worked on developing a menu and more user friendly way of implementing the code. I was
+not able to create all of the menu functions due to a limited amount of time that was available. The ability to send a message
+via UDP was created but I am having trouble dealing with the receiving. I need to talk to the TA about how I am doing it and what
+he thinks would be the most appropriate way to fix it. The function for sending the UDP datagram can send and receive a basic
+message to itself on a local host. The send function does not currently have the timer built into the function yet for the 30
+seconds of attempts.
 
 Server_supplemental.py
-Server_supplemental.py is almost complete. I need to do more testing of some of the functions. I believe that Register
-and Deregister maybe have some logic issues but needs to be tested to verify. Once I have the client side fixed I will
-run multiple clients and test the logic for wrong mac addresses and other items that is difficult to produce individually.
-In terms of functions, there are a few items that can be put into functions like finding the index of a device and
-creating the response for the client and logging. Moving the message generation and logging into one function will make
-the code more readable.
+I believe that I fixed the logic issue with the register function. I did create a function to handle the continious communication
+with a client. The bulk of the server code was working correctly.
 
-Unfortunately, I wasted a large amount of time when trying to figure out how to get the mac address from the data link layer.
-The professor gave some requirement without actually knowing if we could implement the requirement. Another large amount of time
- was trying to figure out how to turn a string into a bytes. There were multiple options and I believe the encoding and
- decoding will be a good option but it limits the ability to have anything other than strings. I would like to discuss
- possible options with Dr. Gunes or the TA during the meeting. Also I have been stumped in terms of figuring out how to
- handle the read block for the client side. I have not had time to try implementing this on an actual raspberry pi 3
- like I wanted.
+I spent most of the time trying to deal with the server client connection. I could not figure out why the connection was not
+continuous. I could not get the threading to work properly. I created a thread for the main server but when I attempted to
+use two connections it would only process one at a time. I am going to talk the TA about what I need to do to get it working.
+I was not able to figure out how to get Traceroute and ping to work inside of the program so I started to work on the UDP
+connection. On the client side I did not have a chance to get the Treads to work. I need to make a class for the thread but did
+not have time to work on it. There was a lot of things that needed to be implemented on this project with little time. The code does
+compile but it does have some issues.
 

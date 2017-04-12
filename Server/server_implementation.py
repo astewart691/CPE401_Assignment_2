@@ -35,6 +35,7 @@ mac: mac address for the current device
 registration_table = []
 mailbox_container = []
 index = -1
+local_host = '127.0.0.1'
 '''
 Server design was implemented form the lecture on server implementations.
 '''
@@ -44,7 +45,7 @@ Server design was implemented form the lecture on server implementations.
 s = socket(AF_INET, SOCK_STREAM)
 
 # binds the socket to the local host and the designated port
-s.bind(('127.0.0.1', 10001))
+s.bind((local_host, 10001))
 
 # The socket listens for a client to try and connect
 s.listen(5)  # max queued connections
@@ -56,6 +57,7 @@ while True:
     # address is a tuple with the IP address of the client
     sock, addr = s.accept()
 
+    # create a thread to handle additional traffic
     client = threading.Thread(name = (index + 1), target = sup.process_client(sock,
                                                                               addr,
                                                                               registration_table,
