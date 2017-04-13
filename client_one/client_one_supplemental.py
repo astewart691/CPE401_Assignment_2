@@ -515,14 +515,14 @@ def app_task():
 
     elif option == '2':
 
-        cloud_receive('cpe401clientone', 'Traceroute.txt')
+        #cloud_receive('cpe401clientone', 'Traceroute.txt')
         ping_command = subprocess.Popen(['traceroute', host_name], stdout = subprocess.PIPE)
 
         data = ping_command.communicate()[0]
 
         file_dest = 'Traceroute.txt'
 
-    file_act = open(file_dest, 'a')
+    file_act = open(file_dest, 'w')
 
     file_act.write(data + '\r')
 

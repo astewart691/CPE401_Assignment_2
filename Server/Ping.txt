@@ -1,93 +1,6 @@
-
-
 PING www.google.com (172.217.3.164): 56 data bytes
 Request timeout for icmp_seq 0
 
 --- www.google.com ping statistics ---
 2 packets transmitted, 0 packets received, 100.0% packet loss
-PING www.google.com (172.217.3.164): 56 data bytes
-Request timeout for icmp_seq 0
-
---- www.google.com ping statistics ---
-2 packets transmitted, 0 packets received, 100.0% packet loss
-PING www.google.com (172.217.3.164): 56 data bytes
-Request timeout for icmp_seq 0
-
---- www.google.com ping statistics ---
-2 packets transmitted, 0 packets received, 100.0% packet loss
-PING www.google.com (172.217.3.164): 56 data bytes
-Request timeout for icmp_seq 0
-
---- www.google.com ping statistics ---
-2 packets transmitted, 0 packets received, 100.0% packet loss
-PING www.google.com (216.58.195.68): 56 data bytes
-64 bytes from 216.58.195.68: icmp_seq=0 ttl=53 time=26.735 ms
-64 bytes from 216.58.195.68: icmp_seq=1 ttl=53 time=26.647 ms
-
---- www.google.com ping statistics ---
-2 packets transmitted, 2 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 26.647/26.691/26.735/0.044 ms
-PING www.google.com (216.58.194.196): 56 data bytes
-64 bytes from 216.58.194.196: icmp_seq=0 ttl=53 time=51.787 ms
-64 bytes from 216.58.194.196: icmp_seq=1 ttl=53 time=25.930 ms
-
---- www.google.com ping statistics ---
-2 packets transmitted, 2 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 25.930/38.858/51.787/12.928 ms
-PING www.google.com (172.217.6.36): 56 data bytes
-64 bytes from 172.217.6.36: icmp_seq=0 ttl=53 time=29.845 ms
-64 bytes from 172.217.6.36: icmp_seq=1 ttl=53 time=30.304 ms
-
---- www.google.com ping statistics ---
-2 packets transmitted, 2 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 29.845/30.075/30.304/0.229 ms
-PING www.google.com (172.217.6.68): 56 data bytes
-64 bytes from 172.217.6.68: icmp_seq=0 ttl=53 time=25.899 ms
-64 bytes from 172.217.6.68: icmp_seq=1 ttl=53 time=31.123 ms
-
---- www.google.com ping statistics ---
-2 packets transmitted, 2 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 25.899/28.511/31.123/2.612 ms
-PING www.google.com (216.58.195.228): 56 data bytes
-64 bytes from 216.58.195.228: icmp_seq=0 ttl=53 time=31.467 ms
-64 bytes from 216.58.195.228: icmp_seq=1 ttl=53 time=30.271 ms
-
---- www.google.com ping statistics ---
-2 packets transmitted, 2 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 30.271/30.869/31.467/0.598 ms
-PING www.google.com (216.58.195.228): 56 data bytes
-64 bytes from 216.58.195.228: icmp_seq=0 ttl=53 time=26.462 ms
-64 bytes from 216.58.195.228: icmp_seq=1 ttl=53 time=29.618 ms
-
---- www.google.com ping statistics ---
-2 packets transmitted, 2 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 26.462/28.040/29.618/1.578 ms
-PING www.google.com (216.58.194.164): 56 data bytes
-64 bytes from 216.58.194.164: icmp_seq=0 ttl=53 time=26.720 ms
-64 bytes from 216.58.194.164: icmp_seq=1 ttl=53 time=26.364 ms
-
---- www.google.com ping statistics ---
-2 packets transmitted, 2 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 26.364/26.542/26.720/0.178 ms
-PING www.google.com (172.217.6.68): 56 data bytes
-64 bytes from 172.217.6.68: icmp_seq=0 ttl=53 time=26.465 ms
-64 bytes from 172.217.6.68: icmp_seq=1 ttl=53 time=26.925 ms
-
---- www.google.com ping statistics ---
-2 packets transmitted, 2 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 26.465/26.695/26.925/0.230 ms
-PING www.google.com (172.217.6.68): 56 data bytes
-64 bytes from 172.217.6.68: icmp_seq=0 ttl=53 time=36.787 ms
-64 bytes from 172.217.6.68: icmp_seq=1 ttl=53 time=85.940 ms
-
---- www.google.com ping statistics ---
-2 packets transmitted, 2 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 36.787/61.364/85.940/24.576 ms
-PING www.google.com (216.58.195.228): 56 data bytes
-64 bytes from 216.58.195.228: icmp_seq=0 ttl=53 time=26.242 ms
-64 bytes from 216.58.195.228: icmp_seq=1 ttl=53 time=37.450 ms
-
---- www.google.com ping statistics ---
-2 packets transmitted, 2 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 26.242/31.846/37.450/5.604 ms
 

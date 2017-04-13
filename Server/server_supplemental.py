@@ -554,29 +554,69 @@ def log(file_dest, message):
 
 def cloud_pull(device_id, notifcation_type):
 
-    filepath = 'client' + '/' + device_id + '/'
+    clientfilepath = 'client' + '/' + device_id + '/'
+
+    serverfilepath = 'Server' + '/'
 
     bucket_name = 'cpe401'
 
     if notifcation_type == '1':
 
-        cloud_receive(bucket_name, filepath, 'Ping.txt')
+        cloud_receive(bucket_name, clientfilepath, 'Ping.txt')
+
+
+        #cloud_receive(bucket_name, serverfilepath, 'ServerPing.txt')
+
+        cloud_append('Ping.txt', 'ServerPing.txt')
 
         cloud_push(bucket_name, notifcation_type)
+
+        code = '9'
+
+        msg = 'ACK' + ',' + code + ',' + device_id + ',' + notifcation_type
+
+        msg_length = len(msg)
+
+        complete_message = str(msg_length) + ',' + msg
+
+        log(SUCCESSFUL, complete_message)
 
     elif notifcation_type == '2':
 
-        cloud_receive(bucket_name, filepath, 'Traceroute.txt')
+        cloud_receive(bucket_name, clientfilepath, 'Traceroute.txt')
+
+        # cloud_receive( bucket_name , serverfilepath , 'ServerPing.txt' )
 
         cloud_push(bucket_name, notifcation_type)
+
+        code = '9'
+
+        msg = 'ACK' + ',' + code + ',' + device_id + ',' + notifcation_type
+
+        msg_length = len(msg)
+
+        complete_message = str(msg_length) + ',' + msg
+
+        log(SUCCESSFUL, complete_message)
+
+    else:
+        code = '5'
+
+        msg = 'NACK' + ',' + code + ',' + device_id + ',' + notifcation_type
+
+        msg_length = len(msg)
+
+        complete_message = str(msg_length) + ',' + msg
+
+        log(ERROR, complete_message)
+
+    return complete_message
 
 
 def cloud_receive(bucket_loc, filepath, filename):
     # create connection for AWS S3 service
     s3 = boto3.resource('s3')
-
     file_value = filepath + filename
-
     # download file that will be updated
     s3.Object(bucket_loc, file_value).download_file(filename)
 
@@ -600,12 +640,24 @@ def cloud_push(bucket_loc, notif_type):
 
     if notif_type == '1':
 
-        filename += 'Ping.txt'
+        filename += 'ServerPing.txt'
 
-        s3.Object(bucket_loc, filename).upload_file('Ping.txt')
+        s3.Object(bucket_loc, filename).upload_file('ServerPing.txt')
 
     elif notif_type == '2':
 
-        filename += 'Traceroute.txt'
+        filename += 'ServerTraceroute.txt'
 
-        s3.Object(bucket_loc, filename).upload_file('Traceroute.txt')
+        s3.Object(bucket_loc, filename).upload_file('ServerTraceroute.txt')
+
+
+def cloud_append(file_source, file_dest):
+
+    fileS = open(file_source, 'r')
+
+    fileD = open(file_dest, 'a')
+
+    file_value = fileS.read()
+
+    fileD.write(file_value)
+
