@@ -15,34 +15,30 @@ client_one_supplemental.py
 The initial design and implementation of the implementation of the server and clients is from the python lectures in class.
 
 Client_one_implementation.py
-The bulk of the code was moved to the client_one_supplemental.py file. The main issue is that the activity and error logging
-has been taken away until I can finish fixing the menu setup for the program. Once that is completed I will incorporate the
-logging for each of the sections. Also I was not able to get the threads to work properly.
+I was not able to get the threading working on the client side still. Currently the code for client_one_implementation
+is the same as previous submitted. There was not enough time to figure out the aws and the multithreading.
 
 Server_implementation.py
-The general implementation for the server_implementation.py file is essectially the same as Assignment 2. The issue of not being
-able to maintain a connection with a client has been fix. I created a function that should create a thread whenever a new client
-creates a connection. I do believe that it cannot handle two connections at a time. I think that I made a mistake with the thread
-in the program. I need to talk to the TA about it and get some advice.
+The threading has not yet been fixed on for the project. There was not enough time to figure out the aws and
+multithreading components. The code for the server_implementation has remained somewhat the same.
 
 Client_one_supplemental.py
-Client_one_supplemental.py is where the functions that create the appropriate message are created. The main message creation
-is used from the Assignment 2 code. I worked on developing a menu and more user friendly way of implementing the code. I was
-not able to create all of the menu functions due to a limited amount of time that was available. The ability to send a message
-via UDP was created but I am having trouble dealing with the receiving. I need to talk to the TA about how I am doing it and what
-he thinks would be the most appropriate way to fix it. The function for sending the UDP datagram can send and receive a basic
-message to itself on a local host. The send function does not currently have the timer built into the function yet for the 30
-seconds of attempts.
+Client_one_supplemental has the ability to push a message to the S3 bucket CPE401. The client will push the file update to
+a folder named as the device name. Once the file has been update the client will send a tcp message to the server using CLOUD.
+The server will pull from the file using the device name as the path.
 
 Server_supplemental.py
-I believe that I fixed the logic issue with the register function. I did create a function to handle the continious communication
-with a client. The bulk of the server code was working correctly.
+Server_supplemental.py is altered to accomodate the cloud computing component required for assignment 4. The tcp message
+section was altered to accommodate the push notification from the clients. The clients will use CLOUD to notify the server
+of a new update to either a ping or traceroute file. The client will include a 1 for ping and 2 for the traceroute. Having
+the type of message will stop any unnecessary requests. The server will also erase the file that it pulls from. Thus stopping
+redundent data from being pulled.
 
-I spent most of the time trying to deal with the server client connection. I could not figure out why the connection was not
-continuous. I could not get the threading to work properly. I created a thread for the main server but when I attempted to
-use two connections it would only process one at a time. I am going to talk the TA about what I need to do to get it working.
-I was not able to figure out how to get Traceroute and ping to work inside of the program so I started to work on the UDP
-connection. On the client side I did not have a chance to get the Treads to work. I need to make a class for the thread but did
-not have time to work on it. There was a lot of things that needed to be implemented on this project with little time. The code does
-compile but it does have some issues.
+I was not able to get the multithreading from assignment 3 working. I figured it was more important to work out the
+issues with the AWS system. I was not able to figure out how to setup tokens and there was going to be an issue with
+tokens timing out from what I found. It was simpler to figure out how to set up the credentials for AWS using the command
+line interface. The server does not establish the files for the clients. The setup of the files is self explanitory with how I
+set the files up. Everything else was setup according to how Dr. Gunes stated in class. I was not able to figure out how to
+delete the files from the server and client after uploading to the cloud. I am going to look into how to do this after the
+semester is over.
 

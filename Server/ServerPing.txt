@@ -87,4 +87,33 @@ Request timeout for icmp_seq 0
 
 --- www.google.com ping statistics ---
 2 packets transmitted, 0 packets received, 100.0% packet loss
+PING www.google.com (216.58.194.36): 56 data bytes
+64 bytes from 216.58.194.36: icmp_seq=0 ttl=55 time=67.059 ms
+64 bytes from 216.58.194.36: icmp_seq=1 ttl=55 time=64.932 ms
+
+--- www.google.com ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 64.932/65.995/67.059/1.064 ms
+PING cmsdss-tip.unr.edu (134.197.15.101): 56 data bytes
+Request timeout for icmp_seq 0
+
+--- cmsdss-tip.unr.edu ping statistics ---
+2 packets transmitted, 0 packets received, 100.0% packet loss
+PING a781.g.akamai.net (204.2.193.186): 56 data bytes
+64 bytes from 204.2.193.186: icmp_seq=0 ttl=58 time=71.453 ms
+64 bytes from 204.2.193.186: icmp_seq=1 ttl=58 time=64.397 ms
+
+--- a781.g.akamai.net ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 64.397/67.925/71.453/3.528 ms
+PING www.google.com (74.125.28.105): 56 data bytes
+Request timeout for icmp_seq 0
+
+--- www.google.com ping statistics ---
+2 packets transmitted, 0 packets received, 100.0% packet loss
+PING www.google.com (74.125.28.147): 56 data bytes
+Request timeout for icmp_seq 0
+
+--- www.google.com ping statistics ---
+2 packets transmitted, 0 packets received, 100.0% packet loss
 

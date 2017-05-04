@@ -1,5 +1,5 @@
 """
-Project: CPE 401 Assignment2
+Project: CPE 401 Assignment4
 File: client_one_implementation.py
 Author: Aarron Stewart
 """
@@ -31,7 +31,7 @@ def main():
     # create the tcp connection with the server
     tcp_socket.connect((SERVER, PORT))
 
-    # qprint('tcp_port: ' + '%s') % tcp_socket.getsockname()[1]
+    # print('tcp_port: ' + '%s') % tcp_socket.getsockname()[1]
 
     # get the tcp socket port number to create the udp socket correctly
     udp_socket.bind(('127.0.0.1', tcp_socket.getsockname()[1]))
